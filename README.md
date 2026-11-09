@@ -84,13 +84,3 @@ Saída completa em `evidencias_testes.txt` (18 testes, todos OK).
 | Menu: operações com lista vazia | 2,3,4,5,6,8 | 6 avisos de lista vazia | OK |
 | Menu: id inválido e duplicado | "abc", "-3", "0", id repetido | pede de novo / erro de duplicado | OK |
 | Menu: campo vazio e pesquisa sem resultado | "" / "xyz" | reprompt / "Nenhum registro encontrado." | OK |
-
-## 8. Demonstração (roteiro sugerido para o vídeo)
-
-1. Opção 9 (dados de exemplo) e 8 (listar).
-2. Cadastrar um novo registro; tentar repetir o id (mostra o erro).
-3. Pesquisar por título "saude" e por um termo inexistente.
-4. Ordenar por título e por categoria; mostrar o resultado.
-5. Atualizar e excluir (cabeça, meio e cauda).
-6. Opção 7 (análise) e opção 0 (salvar); reabrir e mostrar que os dados persistem.
-7. Mostrar no código `No`, `ListaEncadeada.remover` e `_merge_sort`, e rodar `test_citizen_assist.py`.
