@@ -1,0 +1,23 @@
+test_atributo_e_criterio_invalidos (__main__.TestLista.test_atributo_e_criterio_invalidos) ... ok
+test_atualizar (__main__.TestLista.test_atualizar) ... ok
+test_atualizar_campo_invalido_ou_vazio (__main__.TestLista.test_atualizar_campo_invalido_ou_vazio) ... ok
+test_busca_por_atributo_ignora_acento_e_caixa (__main__.TestLista.test_busca_por_atributo_ignora_acento_e_caixa) ... ok
+test_buscar_por_id (__main__.TestLista.test_buscar_por_id) ... ok
+test_contagem_por_categoria (__main__.TestLista.test_contagem_por_categoria) ... ok
+test_id_duplicado (__main__.TestLista.test_id_duplicado) ... ok
+test_inexistentes (__main__.TestLista.test_inexistentes) ... ok
+test_inserir_e_percorrer (__main__.TestLista.test_inserir_e_percorrer) ... ok
+test_lista_vazia (__main__.TestLista.test_lista_vazia) ... ok
+test_ordenar_estavel_e_cauda_correta (__main__.TestLista.test_ordenar_estavel_e_cauda_correta) ... ok
+test_ordenar_por_id_titulo_categoria (__main__.TestLista.test_ordenar_por_id_titulo_categoria) ... ok
+test_remover_cabeca_meio_cauda (__main__.TestLista.test_remover_cabeca_meio_cauda) ... ok
+test_remover_unico_elemento (__main__.TestLista.test_remover_unico_elemento) ... ok
+test_campo_vazio_e_pesquisa_sem_resultado (__main__.TestMenu.test_campo_vazio_e_pesquisa_sem_resultado) ... ok
+test_id_invalido_e_duplicado (__main__.TestMenu.test_id_invalido_e_duplicado) ... ok
+test_opcao_inexistente (__main__.TestMenu.test_opcao_inexistente) ... ok
+test_operacoes_com_lista_vazia (__main__.TestMenu.test_operacoes_com_lista_vazia) ... ok
+
+----------------------------------------------------------------------
+Ran 18 tests in 0.006s
+
+OK
