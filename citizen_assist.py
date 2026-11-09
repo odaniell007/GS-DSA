@@ -1,13 +1,3 @@
-"""
-Citizen Assist AI - Global Solution 2026.2 (DSA)
-Sistema de gerenciamento e consulta de serviços e orientações ao cidadão.
-
-Estrutura de dados : lista encadeada simples (classes No e ListaEncadeada)
-Busca              : busca sequencial (linear) por id e por atributo
-Ordenação          : Merge Sort implementado sobre a própria lista encadeada
-Execução           : python citizen_assist.py
-"""
-
 import json
 import os
 import unicodedata
