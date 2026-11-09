@@ -2,6 +2,10 @@
 
 Protótipo em **Python 3** de um sistema de gerenciamento e consulta de serviços e orientações ao cidadão, usando uma **lista encadeada implementada pela equipe**, busca sequencial própria e **Merge Sort** próprio.
 
+## Nomes e RM's
+- Daniel Vieira: 573326
+- Gustavo Bitencourt: 568885
+
 ## Como executar
 
 ```bash
