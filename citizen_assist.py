@@ -5,15 +5,13 @@ import unicodedata
 ARQUIVO_DADOS = "dados_citizen_assist.json"
 CAMPOS_EDITAVEIS = ("titulo", "categoria", "descricao", "requisitos", "local")
 
-
-# ---------------------------------------------------------------- utilitários
+# utilitários
 def normalizar(texto):
     """Minúsculas e sem acentos, para busca/ordenação mais amigável."""
     sem_acento = unicodedata.normalize("NFD", str(texto))
     return "".join(c for c in sem_acento if unicodedata.category(c) != "Mn").lower().strip()
 
-
-# ------------------------------------------------------------------- registro
+# registro
 class Servico:
     """Registro de um serviço ou orientação ao cidadão."""
 
@@ -43,15 +41,13 @@ class Servico:
             f"    Local     : {self.local}"
         )
 
-
-# ------------------------------------------------------------ lista encadeada
+#  lista encadeada
 class No:
     """Nó da lista: guarda um Servico e a referência ao próximo nó."""
 
     def __init__(self, dado):
         self.dado = dado
         self.proximo = None
-
 
 class ListaEncadeada:
     """Lista encadeada simples com ponteiro para cabeça e cauda."""
@@ -74,7 +70,7 @@ class ListaEncadeada:
             yield atual.dado
             atual = atual.proximo
 
-    # ---- inserção --------------------------------------------------------
+    # inserção 
     def inserir_fim(self, servico):
         """Insere no fim. Rejeita id duplicado (percorre a lista: O(n))."""
         if self.buscar_por_id(servico.id) is not None:
@@ -87,7 +83,7 @@ class ListaEncadeada:
             self.cauda = novo
         self._tamanho += 1
 
-    # ---- busca -----------------------------------------------------------
+    # busca 
     def buscar_por_id(self, id_):
         """Busca sequencial por id. Retorna o Servico ou None. O(n)."""
         atual = self.cabeca
@@ -108,7 +104,7 @@ class ListaEncadeada:
         alvo = normalizar(termo)
         return [s for s in self if alvo in normalizar(getattr(s, campo))]
 
-    # ---- atualização -----------------------------------------------------
+    # atualização 
     def atualizar(self, id_, **novos):
         """Atualiza campos de um registro existente (o id não muda). O(n)."""
         servico = self.buscar_por_id(id_)
@@ -122,7 +118,7 @@ class ListaEncadeada:
             setattr(servico, campo, str(valor).strip())
         return True
 
-    # ---- remoção ---------------------------------------------------------
+    # remoção 
     def remover(self, id_):
         """Remove o nó com o id dado, religando os vizinhos. O(n)."""
         anterior, atual = None, self.cabeca
@@ -139,7 +135,7 @@ class ListaEncadeada:
         self._tamanho -= 1
         return True
 
-    # ---- ordenação (Merge Sort próprio sobre a lista) --------------------
+    # ordenação (Merge Sort próprio sobre a lista) 
     @staticmethod
     def _chave(campo):
         if campo == "id":
@@ -190,7 +186,7 @@ class ListaEncadeada:
         atual.proximo = a if a is not None else b
         return falso.proximo
 
-    # ---- processamento ---------------------------------------------------
+    #  processamento 
     def contagem_por_categoria(self):
         """Dicionário {categoria: quantidade}. O(n)."""
         contagem = {}
@@ -198,12 +194,10 @@ class ListaEncadeada:
             contagem[s.categoria] = contagem.get(s.categoria, 0) + 1
         return contagem
 
-
-# ----------------------------------------------------------------- persistência
+#  persistencia
 def salvar(lista, arquivo=ARQUIVO_DADOS):
     with open(arquivo, "w", encoding="utf-8") as f:
         json.dump([s.to_dict() for s in lista], f, ensure_ascii=False, indent=2)
-
 
 def carregar(lista, arquivo=ARQUIVO_DADOS):
     """Carrega registros do JSON. Retorna quantos foram carregados."""
@@ -221,7 +215,6 @@ def carregar(lista, arquivo=ARQUIVO_DADOS):
         print("Aviso: arquivo de dados inválido; iniciando com lista vazia.")
         return 0
 
-
 def dados_exemplo():
     return [
         Servico(1, "Vacinação na UBS", "Saúde", "Vacinas do calendário nacional.",
@@ -238,15 +231,13 @@ def dados_exemplo():
                 "Cartão SUS e documento com foto", "UBS mais próxima"),
     ]
 
-
-# ------------------------------------------------------------------ entrada
+# entrada
 def ler_texto(mensagem):
     while True:
         valor = input(mensagem).strip()
         if valor:
             return valor
         print("  Entrada inválida: o campo não pode ficar vazio.")
-
 
 def ler_id(mensagem):
     while True:
@@ -255,8 +246,7 @@ def ler_id(mensagem):
             return int(bruto)
         print("  Entrada inválida: informe um número inteiro positivo.")
 
-
-# --------------------------------------------------------------------- menu
+# menu
 def opcao_cadastrar(lista):
     id_ = ler_id("Id (número inteiro positivo): ")
     if lista.buscar_por_id(id_) is not None:
@@ -273,14 +263,12 @@ def opcao_cadastrar(lista):
     lista.inserir_fim(servico)
     print("  Registro cadastrado com sucesso.")
 
-
 def opcao_consultar(lista):
     if lista.esta_vazia():
         print("  A lista está vazia.")
         return
     servico = lista.buscar_por_id(ler_id("Id a consultar: "))
     print(servico if servico else "  Nenhum registro encontrado com esse id.")
-
 
 def opcao_atualizar(lista):
     if lista.esta_vazia():
@@ -301,14 +289,12 @@ def opcao_atualizar(lista):
     lista.atualizar(id_, **novos)
     print("  Registro atualizado.")
 
-
 def opcao_excluir(lista):
     if lista.esta_vazia():
         print("  A lista está vazia.")
         return
     id_ = ler_id("Id a excluir: ")
     print("  Registro excluído." if lista.remover(id_) else "  Nenhum registro encontrado com esse id.")
-
 
 def opcao_pesquisar(lista):
     if lista.esta_vazia():
@@ -327,14 +313,12 @@ def opcao_pesquisar(lista):
     for s in resultados:
         print(s)
 
-
 def listar(lista):
     if lista.esta_vazia():
         print("  A lista está vazia.")
         return
     for s in lista:
         print(s)
-
 
 def opcao_ordenar(lista):
     if lista.esta_vazia():
@@ -349,7 +333,6 @@ def opcao_ordenar(lista):
     print(f"  Lista ordenada por {campos[escolha]} (Merge Sort):")
     listar(lista)
 
-
 def opcao_analise(lista):
     total = len(lista)
     print(f"  Total de registros: {total}")
@@ -361,7 +344,6 @@ def opcao_analise(lista):
         print(f"    {categoria}: {qtd} ({qtd / total:.0%})")
     mais = max(contagem, key=contagem.get)
     print(f"  Categoria com mais registros: {mais} ({contagem[mais]})")
-
 
 MENU = """
 ===== Citizen Assist AI =====
@@ -376,7 +358,6 @@ MENU = """
 9 - Carregar dados de exemplo
 0 - Encerrar
 """
-
 
 def main():
     lista = ListaEncadeada()
@@ -409,7 +390,6 @@ def main():
             acoes[opcao](lista)
         else:
             print("  Opção inexistente. Escolha um número do menu.")
-
 
 if __name__ == "__main__":
     main()
